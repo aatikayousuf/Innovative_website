@@ -1043,51 +1043,73 @@
        ========================================================================= -->
   <div class="modal-backdrop" id="journalModalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalJournalTitle">
     <div class="journal-modal">
-      <button class="modal-close-btn" id="journalModalCloseBtn" aria-label="Close details modal">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:20px;height:20px;"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-      </button>
-
-      <div class="modal-grid">
-        <!-- Cover Column -->
-        <div class="modal-cover-col">
-          <img id="modalJournalCover" src="" alt="Journal Cover" class="modal-cover-img">
-          <div style="font-size:0.82rem;color:var(--color-text-secondary);text-align:center;">
-            <p id="modalJournalVolume" style="font-weight:600;color:var(--color-navy);"></p>
-            <p style="margin-top:0.25rem;">Creative Commons CC BY 4.0</p>
-          </div>
-        </div>
-
-        <!-- Content Column -->
-        <div class="modal-content-col">
-          <span class="journal-discipline-tag" id="modalJournalDiscipline" style="width:fit-content;"></span>
-          <h2 class="font-serif" id="modalJournalTitle" style="font-size:1.85rem;color:var(--color-navy);line-height:1.2;"></h2>
-          <p id="modalJournalEditor" style="font-size:0.92rem;font-weight:600;color:var(--color-blue);"></p>
-
-          <div style="display:flex;align-items:center;gap:0.75rem;font-size:0.85rem;color:var(--color-text-secondary);">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;color:var(--color-teal);"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-            <span id="modalJournalFrequency"></span>
-          </div>
-
-          <div class="journal-issn-row" id="modalJournalIssnBlock" style="margin-top:0.25rem;"></div>
-
-          <div style="border-top:1px solid var(--color-border);padding-top:1rem;">
-            <h4 style="font-size:0.85rem;text-transform:uppercase;font-family:var(--font-mono);color:var(--color-navy);margin-bottom:0.5rem;letter-spacing:0.1em;">Aims & Scope</h4>
-            <p id="modalJournalDesc" class="body-text" style="font-size:0.92rem;"></p>
-          </div>
-
-          <div style="border-top:1px solid var(--color-border);padding-top:1rem;">
-            <h4 style="font-size:0.85rem;text-transform:uppercase;font-family:var(--font-mono);color:var(--color-navy);margin-bottom:0.5rem;letter-spacing:0.1em;">Key Research Topics</h4>
-            <ul id="modalJournalScopes" class="policy-bullets-list" style="gap:0.5rem;"></ul>
-          </div>
-
-          <div style="padding-top:1rem;display:flex;gap:1rem;flex-wrap:wrap;">
-            <a href="#" target="_blank" rel="noopener noreferrer" class="btn btn-primary" id="modalJournalExternalBtn">
-              <span>Go to Journal Portal</span>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
-            </a>
-          </div>
-        </div>
+      
+      <!-- Modal Header Bar -->
+      <div class="journal-modal__header">
+        <span class="journal-modal__category" id="modalJournalDiscipline"></span>
+        <button class="journal-modal__close-btn" id="journalModalCloseBtn" aria-label="Close details modal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
       </div>
+
+      <!-- Modal Body -->
+      <div class="journal-modal__body">
+        
+        <!-- Left Column: White Card Cover + Navy Portal Button -->
+        <div class="journal-modal__cover-col">
+          <div class="journal-modal__cover-frame">
+            <img id="modalJournalCover" src="" alt="Journal Cover" class="journal-modal__cover-img">
+          </div>
+
+          <a href="#" target="_blank" rel="noopener noreferrer" class="journal-modal__portal-btn" id="modalJournalExternalBtn">
+            <span>Visit Official Portal</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px;"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+          </a>
+        </div>
+
+        <!-- Right Column: Title + Rounded Metadata Cards -->
+        <div class="journal-modal__content-col">
+          
+          <h2 class="journal-modal__title" id="modalJournalTitle"></h2>
+
+          <!-- Metadata Card: Frequency & Editor-in-Chief -->
+          <div class="journal-modal__meta-card">
+            <div class="journal-modal__meta-item">
+              <span class="journal-modal__meta-label">Frequency</span>
+              <span class="journal-modal__meta-val" id="modalJournalFrequency"></span>
+            </div>
+            <div class="journal-modal__meta-divider"></div>
+            <div class="journal-modal__meta-item" id="modalEditorItem">
+              <span class="journal-modal__meta-label">Editor-in-Chief</span>
+              <span class="journal-modal__meta-val" id="modalJournalEditor"></span>
+            </div>
+            <div id="modalIssnItem" style="display:none;"></div>
+          </div>
+
+          <!-- Aims & Scope -->
+          <div class="journal-modal__scope-section">
+            <h3 class="journal-modal__section-heading">AIMS &amp; SCOPE</h3>
+            <p class="journal-modal__desc" id="modalJournalDesc"></p>
+          </div>
+
+          <!-- Publishing & Ethics Card -->
+          <div class="journal-modal__ethics-card">
+            <h4 class="journal-modal__ethics-title">Publishing &amp; Ethics</h4>
+            <p class="journal-modal__ethics-desc" id="modalJournalEthics">
+              Double-blind peer review &middot; CC BY 4.0 Diamond Open Access &middot; $0 APCs
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Modal Footer Bar -->
+      <div class="journal-modal__footer">
+        <span class="journal-modal__footer-text">Innovative Insights (SMC-Private) Limited</span>
+        <button type="button" class="journal-modal__footer-close" id="journalModalFooterCloseBtn">Close</button>
+      </div>
+
     </div>
   </div>
 

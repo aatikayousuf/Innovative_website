@@ -1419,13 +1419,12 @@ input, select, textarea {
 }
 
 .journal-modal {
-  background-color: var(--color-white);
-  border-radius: var(--radius-xl);
-  max-width: 900px;
+  background-color: var(--color-ivory);
+  border-radius: 20px;
+  max-width: 860px;
   width: 100%;
-  max-height: 90vh;
-  overflow-y: auto;
-  box-shadow: 0 30px 70px rgba(16, 29, 44, 0.35);
+  overflow: hidden;
+  box-shadow: 0 25px 70px -10px rgba(16, 29, 44, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.7);
   position: relative;
   transform: translateY(20px) scale(0.97);
   transition: transform var(--transition-base);
@@ -1435,53 +1434,219 @@ input, select, textarea {
   transform: translateY(0) scale(1);
 }
 
-.modal-close-btn {
-  position: absolute;
-  top: 1.5rem;
-  right: 1.5rem;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background-color: var(--color-ivory);
-  border: 1px solid var(--color-border);
+/* Modal Header Bar */
+.journal-modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 2rem 0.65rem 2rem;
+}
+
+.journal-modal__category {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-teal);
+}
+
+.journal-modal__close-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-navy);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--color-navy);
-  cursor: pointer;
-  z-index: 10;
+  padding: 0.35rem;
+  border-radius: 50%;
   transition: all var(--transition-fast);
 }
 
-.modal-close-btn:hover {
+.journal-modal__close-btn:hover {
+  background-color: rgba(20, 36, 56, 0.08);
+  color: var(--color-teal);
+  transform: rotate(90deg);
+}
+
+/* Modal Body */
+.journal-modal__body {
+  display: grid;
+  grid-template-columns: 245px 1fr;
+  gap: 2.25rem;
+  padding: 0.65rem 2rem 1.75rem 2rem;
+  align-items: start;
+}
+
+/* Left Cover Column */
+.journal-modal__cover-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+.journal-modal__cover-frame {
+  background-color: var(--color-white);
+  border-radius: 12px;
+  border: 1px solid var(--color-border);
+  padding: 8px;
+  box-shadow: 0 10px 24px -4px rgba(20, 36, 56, 0.1);
+}
+
+.journal-modal__cover-img {
+  width: 100%;
+  border-radius: 6px;
+  display: block;
+  height: auto;
+}
+
+.journal-modal__portal-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.78rem 1.25rem;
   background-color: var(--color-navy);
   color: var(--color-white);
+  border-radius: var(--radius-pill);
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all var(--transition-fast);
 }
 
-.modal-grid {
-  display: grid;
-  grid-template-columns: 320px 1fr;
-  gap: 2.5rem;
-  padding: 2.5rem;
+.journal-modal__portal-btn:hover {
+  background-color: var(--color-teal);
+  color: var(--color-white);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px -2px rgba(57, 140, 133, 0.35);
 }
 
-.modal-cover-col {
+/* Right Content Column */
+.journal-modal__content-col {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
 }
 
-.modal-cover-img {
-  width: 100%;
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-book-lg);
+.journal-modal__title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.85rem, 2.7vw, 2.45rem);
+  font-weight: 700;
+  color: var(--color-navy);
+  line-height: 1.15;
+  margin-bottom: 1.15rem;
+}
+
+/* Card 1: Key Metadata */
+.journal-modal__meta-card {
+  background-color: var(--color-white);
   border: 1px solid var(--color-border);
+  border-radius: 14px;
+  padding: 1.1rem 1.35rem;
+  margin-bottom: 1.25rem;
+  box-shadow: 0 2px 8px rgba(20, 36, 56, 0.03);
 }
 
-.modal-content-col {
+.journal-modal__meta-item {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+}
+
+.journal-modal__meta-label {
+  font-family: var(--font-mono);
+  font-size: 0.73rem;
+  color: #7A8699;
+  letter-spacing: 0.03em;
+  margin-bottom: 0.2rem;
+}
+
+.journal-modal__meta-val {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-navy);
+}
+
+.journal-modal__meta-divider {
+  height: 1px;
+  background-color: #F0EEE8;
+  margin: 0.75rem 0;
+}
+
+/* Scope Section */
+.journal-modal__scope-section {
+  margin-bottom: 1.25rem;
+}
+
+.journal-modal__section-heading {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-navy);
+  margin-bottom: 0.45rem;
+}
+
+.journal-modal__desc {
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+
+/* Card 2: Publishing & Ethics */
+.journal-modal__ethics-card {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  padding: 0.9rem 1.35rem;
+  box-shadow: 0 2px 8px rgba(20, 36, 56, 0.03);
+}
+
+.journal-modal__ethics-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--color-navy);
+  margin-bottom: 0.25rem;
+}
+
+.journal-modal__ethics-desc {
+  font-size: 0.83rem;
+  color: var(--color-text-secondary);
+  line-height: 1.45;
+}
+
+/* Footer Bar */
+.journal-modal__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 2rem;
+  border-top: 1px solid rgba(230, 232, 232, 0.8);
+  background-color: var(--color-white);
+}
+
+.journal-modal__footer-text {
+  font-size: 0.82rem;
+  color: #7A8699;
+}
+
+.journal-modal__footer-close {
+  background: none;
+  border: none;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--color-navy);
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  transition: all var(--transition-fast);
+}
+
+.journal-modal__footer-close:hover {
+  color: var(--color-teal);
+  background-color: var(--color-ivory);
 }
 
 /* ==========================================================================
@@ -2121,8 +2286,9 @@ input, select, textarea {
     gap: 2.5rem;
   }
 
-  .modal-grid {
-    grid-template-columns: 1fr;
+  .journal-modal__body {
+    grid-template-columns: 220px 1fr;
+    gap: 1.75rem;
   }
 }
 
@@ -2133,6 +2299,29 @@ input, select, textarea {
 
   .mobile-nav-toggle {
     display: flex;
+  }
+
+  .journal-modal {
+    max-height: 92vh;
+    overflow-y: auto;
+  }
+
+  .journal-modal__header,
+  .journal-modal__body,
+  .journal-modal__footer {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  .journal-modal__body {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .journal-modal__cover-col {
+    max-width: 220px;
+    margin: 0 auto;
+    width: 100%;
   }
 
   .about-pillars-grid {

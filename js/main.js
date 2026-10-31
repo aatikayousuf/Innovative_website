@@ -480,16 +480,15 @@ document.addEventListener('DOMContentLoaded', () => {
   // =========================================================================
   const journalModalBackdrop = document.getElementById('journalModalBackdrop');
   const journalModalCloseBtn = document.getElementById('journalModalCloseBtn');
+  const journalModalFooterCloseBtn = document.getElementById('journalModalFooterCloseBtn');
 
   const modalCover = document.getElementById('modalJournalCover');
   const modalDiscipline = document.getElementById('modalJournalDiscipline');
   const modalTitle = document.getElementById('modalJournalTitle');
   const modalEditor = document.getElementById('modalJournalEditor');
   const modalFrequency = document.getElementById('modalJournalFrequency');
-  const modalVolume = document.getElementById('modalJournalVolume');
-  const modalIssnBlock = document.getElementById('modalJournalIssnBlock');
   const modalDesc = document.getElementById('modalJournalDesc');
-  const modalScopes = document.getElementById('modalJournalScopes');
+  const modalIssnItem = document.getElementById('modalIssnItem');
   const modalExternalBtn = document.getElementById('modalJournalExternalBtn');
 
   window.openJournalModal = (journalId) => {
@@ -500,33 +499,25 @@ document.addEventListener('DOMContentLoaded', () => {
     if (modalDiscipline) modalDiscipline.textContent = journal.discipline;
     if (modalTitle) modalTitle.textContent = journal.title;
     if (modalEditor) {
-      modalEditor.textContent = journal.editorInChief ? `Editor-in-Chief: ${journal.editorInChief}` : 'Editorial Board: Independent Subject Experts';
+      modalEditor.textContent = journal.editorInChief ? journal.editorInChief : 'Editorial Board Secretariat';
     }
     if (modalFrequency) modalFrequency.textContent = journal.frequency;
-    if (modalVolume) modalVolume.textContent = journal.volumeInfo || 'Active Publication';
     if (modalDesc) modalDesc.textContent = journal.description;
 
-    if (modalIssnBlock) {
-      if (journal.issnOnline && journal.issnPrint) {
-        modalIssnBlock.innerHTML = `
-          <div class="journal-issn-item"><strong>Online ISSN:</strong> ${journal.issnOnline}</div>
-          <div class="journal-issn-item"><strong>Print ISSN:</strong> ${journal.issnPrint}</div>
+    if (modalIssnItem) {
+      if (journal.issnOnline) {
+        modalIssnItem.innerHTML = `
+          <div class="journal-modal__meta-divider"></div>
+          <div class="journal-modal__meta-item">
+            <span class="journal-modal__meta-label">ISSN &amp; Identifier</span>
+            <span class="journal-modal__meta-val" style="font-size:0.88rem;">e-ISSN: ${journal.issnOnline}${journal.issnPrint ? ` &middot; Print: ${journal.issnPrint}` : ''}${journal.doiPrefix ? ` &middot; DOI: ${journal.doiPrefix}` : ''}</span>
+          </div>
         `;
-        modalIssnBlock.style.display = 'flex';
+        modalIssnItem.style.display = 'block';
       } else {
-        modalIssnBlock.style.display = 'none';
+        modalIssnItem.innerHTML = '';
+        modalIssnItem.style.display = 'none';
       }
-    }
-
-    if (modalScopes) {
-      modalScopes.innerHTML = journal.scopePoints
-        .map(sp => `
-          <li class="policy-bullet">
-            <span class="policy-bullet__dot"></span>
-            <span>${sp}</span>
-          </li>
-        `)
-        .join('');
     }
 
     if (modalExternalBtn) {
@@ -545,6 +536,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (journalModalCloseBtn) {
     journalModalCloseBtn.addEventListener('click', closeJournalModal);
+  }
+
+  if (journalModalFooterCloseBtn) {
+    journalModalFooterCloseBtn.addEventListener('click', closeJournalModal);
   }
 
   if (journalModalBackdrop) {
